@@ -1,0 +1,83 @@
+public class Car {
+    private String make;
+    private String model;
+    private int year;
+    private double mileage;  // in km – must be non-negative
+    private final String vin; // Vehicle Identification Number – immutable, no setter
+
+    public Car(String make, String model, int year, double mileage, String vin) {
+        // validation in constructor for initial state
+        if (make == null || make.isEmpty()) {
+            throw new IllegalArgumentException("make must be non-null, non-empty");
+        }
+        if (model == null || model.isEmpty()) {
+            throw new IllegalArgumentException("model must be non-null, non-empty");
+        }
+        if (year < 1886) {
+            throw new IllegalArgumentException("year must be realistic");
+        }
+        if (mileage < 0.0) {
+            throw new IllegalArgumentException("mileage cannot be negative");
+        }
+        if (vin == null || vin.length() != 17) {
+            throw new IllegalArgumentException("VIN must be 17 characters");
+        }
+        this.make = make;
+        this.model = model;
+        this.year = year;
+        this.mileage = mileage;
+        this.vin = vin;  // final
+    }
+
+    // Getters
+    public String getMake() {
+        return make;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public double getMileage() {
+        return mileage;
+    }
+
+    public String getVin() {
+        return vin;
+    }
+
+    // Setters (only for fields you want mutable)
+    public void setMake(String make) {
+        if (make == null || make.isEmpty()) {
+            throw new IllegalArgumentException("make must be non-null, non-empty");
+        }
+        this.make = make;
+    }
+
+    public void setModel(String model) {
+        if (model == null || model.isEmpty()) {
+            throw new IllegalArgumentException("model must be non-null, non-empty");
+        }
+        this.model = model;
+    }
+
+    public void setYear(int year) {
+        if (year < 1886) {
+            throw new IllegalArgumentException("year must be realistic");
+        }
+        this.year = year;
+    }
+
+    public void setMileage(double mileage) {
+        if (mileage < 0.0) {
+            throw new IllegalArgumentException("mileage cannot be negative");
+        }
+        this.mileage = mileage;
+    }
+
+    // No setter for vin, because it's final / immutable
+}
