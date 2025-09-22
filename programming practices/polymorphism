@@ -1,0 +1,36 @@
+
+public interface AnimalShelter {
+    // overriding subclasses may return a more specific type (covariant return)
+    Animal getAnimalForAdoption();
+}
+
+public class Animal {
+    public String name;
+    public Animal(String name) { this.name = name; }
+}
+
+public class Cat extends Animal {
+    public Cat(String name) { super(name); }
+    public void meow() { System.out.println("Meow!"); }
+}
+
+public class CatShelter implements AnimalShelter {
+
+    @Override
+    public Cat getAnimalForAdoption() {
+        return new Cat("Whiskers");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        AnimalShelter shelter = new CatShelter();
+        Animal a = shelter.getAnimalForAdoption();
+
+        if (a instanceof Cat) {
+           Cat c = (Cat)a; 
+           c.meow();
+        }
+       
+    }
+}
