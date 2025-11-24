@@ -1,0 +1,31 @@
+"use strict";
+
+class Product {
+  constructor(id, name, price, category) {
+    this.id = id;
+    this.name = name;
+    this.price = price;
+    this.category = category;
+  }
+  applyDiscount(discountPercent = 10) {
+    this.price = this.price - (this.price * discountPercent / 100);
+  }
+
+  getDetails() {
+    return `ID: ${this.id} | Name: ${this.name} | Price: ₹${this.price} | Category: ${this.category}`;
+  }
+}
+
+const products = [
+  new Product(101, "Laptop", 55000, "Electronics"),
+  new Product(102, "Shoes", 1200, "Fashion"),
+  new Product(103, "Book", 450, "Education"),
+  new Product(104, "Smartwatch", 3000, "Electronics")
+];
+
+products.forEach(product => product.applyDiscount());
+
+const expensiveProducts = products.filter(product => product.price > 1000);
+
+console.log("Products with price greater than 1000 after discount:");
+expensiveProducts.forEach(product => console.log(product.getDetails()));
